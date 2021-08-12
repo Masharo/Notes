@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="padding_noteitem_horizontaltextview">7dp</dimen>
+    <dimen name="padding_noteitem_verticaltextview">6dp</dimen>
+
+</resources>

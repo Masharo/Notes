@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="color_colorcard_red">Красный</string>
+    <string name="color_colorcard_yellow">Жёлтый</string>
+    <string name="color_colorcard_green">Зелёный</string>
+    <string name="text_noteitem_dayofweek">День недели:</string>
+
+    <string name="text_dayofweek_monday">Понедельник</string>
+    <string name="text_dayofweek_tuesday">Вторник</string>
+    <string name="text_dayofweek_wednesday">Среда</string>
+    <string name="text_dayofweek_thursday">Четверг</string>
+    <string name="text_dayofweek_friday">Пятница</string>
+    <string name="text_dayofweek_saturday">Суббота</string>
+    <string name="text_dayofweek_sunday">Воскресенье</string>
+</resources>
