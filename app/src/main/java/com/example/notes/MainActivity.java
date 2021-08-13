@@ -1,6 +1,8 @@
 package com.example.notes;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         NotesAdapter adapter = new NotesAdapter(this, notes);
         recyclerViewNotes.setAdapter(adapter);
+    }
+
+    public void onClickAddNote(View view) {
+        Intent intent = new Intent(this, AddNoteActivity.class);
+        startActivity(intent);
     }
 }
