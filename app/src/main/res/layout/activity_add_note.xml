@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNoteActivity"
+    android:orientation="vertical"
     android:padding="10dp" >
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_addnote_percent5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
 
     <TextView
         android:id="@+id/textview_addnote_name"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="Создание новой задачи"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline_addnote_percent5"
+        android:layout_marginVertical="10dp"
         android:gravity="center_horizontal" />
 
     <EditText
@@ -31,17 +24,16 @@
         android:layout_height="wrap_content"
         android:hint="Введите название"
         android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/guideline_addnote_percent5"
         tools:layout_editor_absoluteX="10dp" />
 
     <EditText
         android:id="@+id/edittext_addnote_description"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/edittext_addnote_title"
-        app:layout_constraintBottom_toTopOf="@id/button_addnote_save"
+        android:layout_marginBottom="10dp"
         android:hint="Описание"
         android:backgroundTint="@color/white" />
 
@@ -51,7 +43,6 @@
         android:layout_height="wrap_content"
         android:text="Сохранить"
         android:textColor="@color/white"
-        android:background="@drawable/button_selector"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:background="@drawable/button_selector" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
