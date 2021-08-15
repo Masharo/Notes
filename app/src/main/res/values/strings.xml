@@ -12,4 +12,10 @@
     <string name="text_dayofweek_friday">Пятница</string>
     <string name="text_dayofweek_saturday">Суббота</string>
     <string name="text_dayofweek_sunday">Воскресенье</string>
+    <string name="string_activityaddnote_createnewtask">Создание новой задачи</string>
+    <string name="string_activityaddnote_inputtitle">Введите название</string>
+    <string name="string_activityaddnote_inputdescription">Описание</string>
+    <string name="string_activityaddnote_priority">Приоритет</string>
+    <string name="string_activityaddnote_date">Дата</string>
+    <string name="string_activityaddnote_save">Сохранить</string>
 </resources>

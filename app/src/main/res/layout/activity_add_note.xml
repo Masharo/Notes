@@ -12,7 +12,7 @@
         android:id="@+id/textview_addnote_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Создание новой задачи"
+        android:text="@string/string_activityaddnote_createnewtask"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_marginVertical="10dp"
@@ -22,7 +22,7 @@
         android:id="@+id/edittext_addnote_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите название"
+        android:hint="@string/string_activityaddnote_inputtitle"
         android:minHeight="48dp"
         tools:layout_editor_absoluteX="10dp" />
 
@@ -34,14 +34,41 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:layout_marginBottom="10dp"
-        android:hint="Описание"
+        android:hint="@string/string_activityaddnote_inputdescription"
         android:backgroundTint="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_activityaddnote_priority"
+            android:layout_marginEnd="@dimen/margin_activityaddnote_buttoncentermarginprioritydate"
+            android:layout_marginVertical="@dimen/margin_activityaddnote_verticalbuttonsprioritydateandsave"
+            android:textColor="@color/white"
+            android:background="@drawable/button_selector"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/string_activityaddnote_date"
+            android:layout_marginStart="@dimen/margin_activityaddnote_buttoncentermarginprioritydate"
+            android:layout_marginVertical="@dimen/margin_activityaddnote_verticalbuttonsprioritydateandsave"
+            android:textColor="@color/white"
+            android:background="@drawable/button_selector"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_addnote_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Сохранить"
+        android:text="@string/string_activityaddnote_save"
         android:textColor="@color/white"
         android:background="@drawable/button_selector" />
 
