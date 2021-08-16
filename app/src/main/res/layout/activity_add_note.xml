@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNoteActivity"
-    android:orientation="vertical"
     android:padding="10dp" >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_addnote_bottomdescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
 
     <TextView
         android:id="@+id/textview_addnote_name"
@@ -15,6 +21,7 @@
         android:text="@string/string_activityaddnote_createnewtask"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginVertical="10dp"
         android:gravity="center_horizontal" />
 
@@ -23,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/string_activityaddnote_inputtitle"
+        app:layout_constraintTop_toBottomOf="@id/textview_addnote_name"
         android:minHeight="48dp"
         tools:layout_editor_absoluteX="10dp" />
 
@@ -34,35 +42,16 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/edittext_addnote_title"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_addnote_bottomdescription"
         android:hint="@string/string_activityaddnote_inputdescription"
         android:backgroundTint="@color/white" />
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/spinner_addnote_dayofweek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/string_activityaddnote_priority"
-            android:layout_marginEnd="@dimen/margin_activityaddnote_buttoncentermarginprioritydate"
-            android:layout_marginVertical="@dimen/margin_activityaddnote_verticalbuttonsprioritydateandsave"
-            android:textColor="@color/white"
-            android:background="@drawable/button_selector"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/string_activityaddnote_date"
-            android:layout_marginStart="@dimen/margin_activityaddnote_buttoncentermarginprioritydate"
-            android:layout_marginVertical="@dimen/margin_activityaddnote_verticalbuttonsprioritydateandsave"
-            android:textColor="@color/white"
-            android:background="@drawable/button_selector"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/guideline_addnote_bottomdescription" />
 
     <Button
         android:id="@+id/button_addnote_save"
@@ -70,6 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/string_activityaddnote_save"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/button_selector" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

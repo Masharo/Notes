@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewNotes;
-    private ArrayList<Note> notes;
+    private static ArrayList<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
