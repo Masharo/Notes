@@ -2,13 +2,18 @@ package com.example.notes;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+
 public class Note {
     private String title,
                    description;
     private  DayOfWeek dayOfWeek;
     private Priority priority;
 
-    public Note(String title, String description, DayOfWeek dayOfWeek, Priority priority) {
+    public Note(@NonNull String title, @NonNull String description,
+                @NonNull DayOfWeek dayOfWeek, @NonNull Priority priority) {
+
         this.title = title;
         this.description = description;
         this.dayOfWeek = dayOfWeek;
@@ -25,6 +30,10 @@ public class Note {
 
     public int getDayOfWeek() {
         return dayOfWeek.getName();
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     public int getPriority(Context context) {

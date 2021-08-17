@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.annotation.IdRes;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Priority {
     RED {
@@ -61,7 +60,7 @@ public enum Priority {
     public abstract int getColor(Context view);
     public abstract int getId();
 
-    public Priority searchPriority(@IdRes int resourcesId) {
+    public static Priority searchPriority(@IdRes int resourcesId) {
         return Arrays.stream(Priority.values()) .filter(i -> i.getId() == resourcesId)
                                                 .findFirst()
                                                 .orElse(null);

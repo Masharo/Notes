@@ -1,5 +1,9 @@
 package com.example.notes;
 
+import androidx.annotation.IdRes;
+
+import java.util.Arrays;
+
 public enum DayOfWeek {
 
     MONDAY {
@@ -46,4 +50,10 @@ public enum DayOfWeek {
     };
 
     public abstract int getName();
+
+    public static DayOfWeek searchDay(@IdRes int resourceId) {
+        return Arrays.stream(DayOfWeek.values()) .filter(i -> i.getName() == resourceId)
+                .findFirst()
+                .orElse(null);
+    }
 }
