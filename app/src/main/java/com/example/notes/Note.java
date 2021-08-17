@@ -6,9 +6,9 @@ public class Note {
     private String title,
                    description;
     private  DayOfWeek dayOfWeek;
-    private ColorCard priority;
+    private Priority priority;
 
-    public Note(String title, String description, DayOfWeek dayOfWeek, ColorCard priority) {
+    public Note(String title, String description, DayOfWeek dayOfWeek, Priority priority) {
         this.title = title;
         this.description = description;
         this.dayOfWeek = dayOfWeek;

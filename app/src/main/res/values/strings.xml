@@ -18,4 +18,8 @@
     <string name="string_activityaddnote_priority">Приоритет</string>
     <string name="string_activityaddnote_date">Дата</string>
     <string name="string_activityaddnote_save">Сохранить</string>
+    <string name="text_addnote_priotitytitle">Приоритет:</string>
+    <string name="text_addnote_priorityhigh">Высокий</string>
+    <string name="text_addnote_prioritylow">Низкий</string>
+    <string name="text_addnote_prioritymedium">Средний</string>
 </resources>

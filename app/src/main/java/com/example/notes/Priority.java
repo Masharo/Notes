@@ -2,7 +2,12 @@ package com.example.notes;
 
 import android.content.Context;
 
-public enum ColorCard {
+import androidx.annotation.IdRes;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+public enum Priority {
     RED {
         @Override
         public String getName(Context view) {
@@ -12,6 +17,11 @@ public enum ColorCard {
         @Override
         public int getColor(Context view) {
             return view.getResources().getColor(R.color.red);
+        }
+
+        @Override
+        public int getId() {
+            return R.id.radiobutton_addnote_priorityhigh;
         }
     },
     YELLOW {
@@ -24,6 +34,11 @@ public enum ColorCard {
         public int getColor(Context view) {
             return view.getResources().getColor(R.color.green);
         }
+
+        @Override
+        public int getId() {
+            return R.id.radiobutton_addnote_prioritymedium;
+        }
     },
     GREEN {
         @Override
@@ -35,8 +50,20 @@ public enum ColorCard {
         public int getColor(Context view) {
             return view.getResources().getColor(R.color.yellow);
         }
+
+        @Override
+        public int getId() {
+            return R.id.radiobutton_addnote_prioritylow;
+        }
     };
 
     public abstract String getName(Context view);
     public abstract int getColor(Context view);
+    public abstract int getId();
+
+    public Priority searchPriority(@IdRes int resourcesId) {
+        return Arrays.stream(Priority.values()) .filter(i -> i.getId() == resourcesId)
+                                                .findFirst()
+                                                .orElse(null);
+    }
 }
