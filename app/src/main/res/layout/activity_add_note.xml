@@ -89,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_addnote_prioritylow"
                     android:textColor="@color/green"
+                    android:checked="true"
                     android:textSize="17sp" />
 
             </RadioGroup>

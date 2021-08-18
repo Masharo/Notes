@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -13,6 +14,8 @@ public class AddNoteActivity extends Activity {
 
     private Spinner dayOfWeek;
     private RadioGroup groupPriority;
+    private EditText title,
+                     description;
 
     private Note note;
 
@@ -23,6 +26,8 @@ public class AddNoteActivity extends Activity {
 
         dayOfWeek = findViewById(R.id.spinner_addnote_dayofweek);
         groupPriority = findViewById(R.id.radiogroup_addnote_grouppriority);
+        title = findViewById(R.id.edittext_addnote_title);
+        description = findViewById(R.id.edittext_addnote_description);
 
         instanceDayOfWeek();
     }
@@ -39,12 +44,20 @@ public class AddNoteActivity extends Activity {
     }
 
     private void saveDataInNote() {
+
         Priority priority = Priority.searchPriority(groupPriority.getCheckedRadioButtonId());
-        // TODO DayOfWeek day = DayOfWeek.searchDay();
+        DayOfWeek day = DayOfWeek.values()[dayOfWeek.getSelectedItemPosition()];
+        String title = this.title.getText().toString().trim();
+        String description = this.description.getText().toString().trim();
+
+        note = new Note(title, description, day, priority);
     }
 
     public void onClickSave(View view) {
 
+        saveDataInNote();
+        MainActivity.getNotes().add(note);
 
+        finish();
     }
 }

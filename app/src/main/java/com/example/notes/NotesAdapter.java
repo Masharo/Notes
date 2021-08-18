@@ -7,19 +7,32 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;
     private List<Note> notes;
+    private OnNoteClickListener onNoteClickListener;
 
     public NotesAdapter(Context context, List<Note> notes) {
         this.inflater = LayoutInflater.from(context);
         this.notes = notes;
+    }
+
+    interface OnNoteClickListener {
+        void onNoteClick(int position);
+    }
+
+    public void setOnNoteClickListener(OnNoteClickListener onNoteClickListener) {
+        this.onNoteClickListener = onNoteClickListener;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
     }
 
     @NonNull
@@ -60,6 +73,13 @@ public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             textViewTitle = itemView.findViewById(R.id.textview_noteitem_title);
             textViewDescription = itemView.findViewById(R.id.textview_noteitem_description);
             textViewDayOfWeek = itemView.findViewById(R.id.textview_noteitem_dayofweek);
+
+            itemView.setOnClickListener(i ->
+            {
+                if (Objects.nonNull(onNoteClickListener)) {
+                    onNoteClickListener.onNoteClick(getAdapterPosition());
+                }
+            });
         }
     }
 }
