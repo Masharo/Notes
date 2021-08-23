@@ -56,4 +56,8 @@ public enum DayOfWeek {
                 .findFirst()
                 .orElse(null);
     }
+
+    public static int getId(DayOfWeek day) {
+        return Arrays.binarySearch(DayOfWeek.values(), day);
+    }
 }

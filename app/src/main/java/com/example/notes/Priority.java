@@ -31,7 +31,7 @@ public enum Priority {
 
         @Override
         public int getColor(Context view) {
-            return view.getResources().getColor(R.color.green);
+            return view.getResources().getColor(R.color.yellow);
         }
 
         @Override
@@ -47,7 +47,7 @@ public enum Priority {
 
         @Override
         public int getColor(Context view) {
-            return view.getResources().getColor(R.color.yellow);
+            return view.getResources().getColor(R.color.green);
         }
 
         @Override

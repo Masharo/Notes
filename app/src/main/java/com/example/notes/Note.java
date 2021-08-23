@@ -4,8 +4,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 
-public class Note {
+
+public class Note implements Serializable {
+
+    public transient static final String NAME = "NOTE";
+
     private String title,
                    description;
     private  DayOfWeek dayOfWeek;
@@ -28,8 +33,12 @@ public class Note {
         return description;
     }
 
-    public int getDayOfWeek() {
+    public int getDayOfWeekResId() {
         return dayOfWeek.getName();
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
     public Priority getPriority() {

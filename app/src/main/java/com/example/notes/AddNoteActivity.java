@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class AddNoteActivity extends Activity {
 
@@ -17,6 +18,8 @@ public class AddNoteActivity extends Activity {
     private EditText title,
                      description;
 
+    private boolean isNew;
+
     private Note note;
 
     @Override
@@ -24,12 +27,37 @@ public class AddNoteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
+        isNew = true;
+
         dayOfWeek = findViewById(R.id.spinner_addnote_dayofweek);
         groupPriority = findViewById(R.id.radiogroup_addnote_grouppriority);
         title = findViewById(R.id.edittext_addnote_title);
         description = findViewById(R.id.edittext_addnote_description);
 
         instanceDayOfWeek();
+        isNotNewNote();
+    }
+
+    private void isNotNewNote() {
+        if (Objects.nonNull(getIntent()) &&
+            getIntent().hasExtra(Note.NAME) &&
+            getIntent().hasExtra(MainActivity.POSITION)) {
+
+            isNew = false;
+
+            Note noteLocal = (Note) getIntent().getSerializableExtra(Note.NAME);
+            instanceNote(noteLocal.getTitle(),
+                         noteLocal.getDescription(),
+                         noteLocal.getPriority(),
+                         noteLocal.getDayOfWeek());
+        }
+    }
+
+    private void instanceNote(String title, String description, Priority priority, DayOfWeek day) {
+        this.title.setText(title);
+        this.description.setText(description);
+        this.groupPriority.check(priority.getId());
+        this.dayOfWeek.setSelection(DayOfWeek.getId(day));
     }
 
     private void instanceDayOfWeek() {
@@ -56,7 +84,14 @@ public class AddNoteActivity extends Activity {
     public void onClickSave(View view) {
 
         saveDataInNote();
-        MainActivity.getNotes().add(note);
+
+        if (isNew) {
+            MainActivity.getNotes().add(note);
+        } else {
+            int position = getIntent().getIntExtra(MainActivity.POSITION, -1);
+
+            MainActivity.getNotes().set(position, note);
+        }
 
         finish();
     }

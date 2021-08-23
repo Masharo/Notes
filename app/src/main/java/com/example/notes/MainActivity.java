@@ -1,7 +1,7 @@
 package com.example.notes;
 
-import static androidx.recyclerview.widget.ItemTouchHelper.LEFT;
-import static androidx.recyclerview.widget.ItemTouchHelper.RIGHT;
+import static androidx.recyclerview.widget.ItemTouchHelper.START;
+import static androidx.recyclerview.widget.ItemTouchHelper.END;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String POSITION = "POSITION";
 
     private RecyclerView recyclerViewNotes;
     private static ArrayList<Note> notes;
@@ -44,10 +46,14 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
             @Override
             public void onNoteClick(int position) {
-                //Note selectedNote = adapter.getNotes().get(i);
+                Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+                intent.putExtra(Note.NAME, notes.get(position));
+                intent.putExtra(MainActivity.POSITION, position);
 
+                startActivity(intent);
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onLongClick(int position) {
                 notes.remove(position);
@@ -55,24 +61,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, LEFT | RIGHT) {
-            @Override
-            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                return 0;
-            }
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, START | END) {
 
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                remove(viewHolder.getAdapterPosition());
+                remove(viewHolder.getLayoutPosition());
             }
         });
 
         itemTouchHelper.attachToRecyclerView(recyclerViewNotes);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
     }
 
     @SuppressLint("NotifyDataSetChanged")

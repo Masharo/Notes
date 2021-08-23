@@ -53,7 +53,7 @@ public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         holderNotes.textViewTitle.setText(note.getTitle());
         holderNotes.textViewDescription.setText(note.getDescription());
-        holderNotes.textViewDayOfWeek.setText(context.getString(note.getDayOfWeek()));
+        holderNotes.textViewDayOfWeek.setText(context.getString(note.getDayOfWeekResId()));
         holderNotes.textViewTitle.setBackgroundColor(note.getPriority(context));
     }
 
