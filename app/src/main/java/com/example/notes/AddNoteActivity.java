@@ -21,6 +21,7 @@ public class AddNoteActivity extends Activity {
     private boolean isNew;
 
     private Note note;
+    private NotesDBHelper notesDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class AddNoteActivity extends Activity {
         title = findViewById(R.id.edittext_addnote_title);
         description = findViewById(R.id.edittext_addnote_description);
 
+        notesDBHelper = new NotesDBHelper(this);
+
         instanceDayOfWeek();
         isNotNewNote();
     }
@@ -45,11 +48,11 @@ public class AddNoteActivity extends Activity {
 
             isNew = false;
 
-            Note noteLocal = (Note) getIntent().getSerializableExtra(Note.NAME);
-            instanceNote(noteLocal.getTitle(),
-                         noteLocal.getDescription(),
-                         noteLocal.getPriority(),
-                         noteLocal.getDayOfWeek());
+            note = (Note) getIntent().getSerializableExtra(Note.NAME);
+            instanceNote(note.getTitle(),
+                         note.getDescription(),
+                         note.getPriority(),
+                         note.getDayOfWeek());
         }
     }
 
@@ -83,14 +86,15 @@ public class AddNoteActivity extends Activity {
 
     public void onClickSave(View view) {
 
-        saveDataInNote();
-
         if (isNew) {
-            MainActivity.getNotes().add(note);
+            saveDataInNote();
+            notesDBHelper.writeNotesDB(note);
         } else {
-            int position = getIntent().getIntExtra(MainActivity.POSITION, -1);
-
-            MainActivity.getNotes().set(position, note);
+            notesDBHelper.updateNoteDBFromId(note);
+//            int position = getIntent().getIntExtra(MainActivity.POSITION, -1);
+//
+//            MainActivity.getNotes().set(position, note);
+//            notesDBHelper.getWritableDatabase().update()
         }
 
         finish();

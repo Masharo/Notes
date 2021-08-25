@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewNotes;
     private static ArrayList<Note> notes;
     private NotesAdapter adapter;
+    private NotesDBHelper notesDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewNotes = findViewById(R.id.recyclerview_main_notes);
         notes = new ArrayList<>();
         adapter = new NotesAdapter(this, notes);
+        notesDBHelper = new NotesDBHelper(this);
 
-        addNotesDefaultValue();
         instanceNote();
     }
 
@@ -53,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onLongClick(int position) {
-                notes.remove(position);
-                adapter.notifyDataSetChanged();
+
             }
         });
 
@@ -80,26 +80,27 @@ public class MainActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerViewNotes);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onStart() {
         super.onStart();
+        updateNotes();
         adapter.notifyDataSetChanged();
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private void remove(int position) {
-        notes.remove(position);
-        adapter.notifyDataSetChanged();
+        Note removeNote = notes.get(position);
+        Objects.requireNonNull(removeNote.getId());
+
+        notesDBHelper.removeNoteDBFromId(removeNote.getId());
+        updateNotes();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private void addNotesDefaultValue() {
-        notes.addAll(new ArrayList<Note>() {{
-            add(new Note("Парикмахер", "Сделать прическу как у дэба", DayOfWeek.SATURDAY, Priority.RED));
-            add(new Note("Работа", "Не проспать работу", DayOfWeek.FRIDAY, Priority.GREEN));
-            add(new Note("Дота", "Выйграть катку в доту", DayOfWeek.TUESDAY, Priority.YELLOW));
-        }});
+    private void updateNotes() {
 
+        notes.clear();
+        notes.addAll(notesDBHelper.readNotesDB());
         adapter.notifyDataSetChanged();
     }
 
