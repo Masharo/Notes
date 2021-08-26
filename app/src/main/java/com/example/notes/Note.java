@@ -6,6 +6,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public class Note implements Serializable {
@@ -31,6 +32,11 @@ public class Note implements Serializable {
                 @NonNull DayOfWeek dayOfWeek, @NonNull Priority priority) {
 
         this(title, description, dayOfWeek, priority);
+        this.id = id;
+    }
+
+    public void setId(Integer id) {
+        assert Objects.nonNull(id); //Только для обьектов у которых изначально не был указан id
         this.id = id;
     }
 

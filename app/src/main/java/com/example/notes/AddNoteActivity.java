@@ -81,20 +81,20 @@ public class AddNoteActivity extends Activity {
         String title = this.title.getText().toString().trim();
         String description = this.description.getText().toString().trim();
 
-        note = new Note(title, description, day, priority);
+        //если note = null то isNew = true
+        note = isNew ?
+                new Note(title, description, day, priority) :
+                new Note(note.getId(), title, description, day, priority);
     }
 
     public void onClickSave(View view) {
 
+        saveDataInNote();
+
         if (isNew) {
-            saveDataInNote();
             notesDBHelper.writeNotesDB(note);
         } else {
             notesDBHelper.updateNoteDBFromId(note);
-//            int position = getIntent().getIntExtra(MainActivity.POSITION, -1);
-//
-//            MainActivity.getNotes().set(position, note);
-//            notesDBHelper.getWritableDatabase().update()
         }
 
         finish();
