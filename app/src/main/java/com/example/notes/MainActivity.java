@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewNotes;
     private static ArrayList<Note> notes;
     private NotesAdapter adapter;
-    private NotesDBHelper notesDBHelper;
+    private NotesDatabase notesDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewNotes = findViewById(R.id.recyclerview_main_notes);
         notes = new ArrayList<>();
         adapter = new NotesAdapter(this, notes);
-        notesDBHelper = new NotesDBHelper(this);
+        notesDatabase = NotesDatabase.getInstance(getApplicationContext());
 
         instanceNote();
     }
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         Note removeNote = notes.get(position);
         Objects.requireNonNull(removeNote.getId());
 
-        notesDBHelper.removeNoteDBFromId(removeNote.getId());
+        notesDatabase.getNotesDao().deleteNote(removeNote);
         updateNotes();
     }
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateNotes() {
 
         notes.clear();
-        notes.addAll(notesDBHelper.readNotesDB());
+        notes.addAll(notesDatabase.getNotesDao().getAllNotes());
         adapter.notifyDataSetChanged();
     }
 

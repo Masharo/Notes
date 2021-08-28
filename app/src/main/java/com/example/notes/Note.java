@@ -4,21 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Entity(tableName = "notes")
 public class Note implements Serializable {
 
     public transient static final String NAME = "NOTE";
 
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String title,
                    description;
     private  DayOfWeek dayOfWeek;
     private Priority priority;
 
+    @Ignore
     public Note(@NonNull String title, @NonNull String description,
                 @NonNull DayOfWeek dayOfWeek, @NonNull Priority priority) {
 
@@ -28,11 +33,27 @@ public class Note implements Serializable {
         this.priority = priority;
     }
 
-    public Note(Integer id, @NonNull String title, @NonNull String description,
+    public Note(@NonNull Integer id, @NonNull String title, @NonNull String description,
                 @NonNull DayOfWeek dayOfWeek, @NonNull Priority priority) {
 
         this(title, description, dayOfWeek, priority);
         this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public void setId(Integer id) {

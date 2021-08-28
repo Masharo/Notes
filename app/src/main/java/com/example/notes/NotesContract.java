@@ -5,6 +5,7 @@ import android.provider.BaseColumns;
 
 import androidx.annotation.RequiresApi;
 
+@Deprecated
 public class NotesContract {
 
     public static final String TYPE_TEXT = "TEXT",

@@ -21,7 +21,7 @@ public class AddNoteActivity extends Activity {
     private boolean isNew;
 
     private Note note;
-    private NotesDBHelper notesDBHelper;
+    private NotesDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class AddNoteActivity extends Activity {
         title = findViewById(R.id.edittext_addnote_title);
         description = findViewById(R.id.edittext_addnote_description);
 
-        notesDBHelper = new NotesDBHelper(this);
+        database = NotesDatabase.getInstance(getApplicationContext());
 
         instanceDayOfWeek();
         isNotNewNote();
@@ -92,9 +92,9 @@ public class AddNoteActivity extends Activity {
         saveDataInNote();
 
         if (isNew) {
-            notesDBHelper.writeNotesDB(note);
+            database.getNotesDao().insertNote(note);
         } else {
-            notesDBHelper.updateNoteDBFromId(note);
+            database.getNotesDao().updateNote(note);
         }
 
         finish();

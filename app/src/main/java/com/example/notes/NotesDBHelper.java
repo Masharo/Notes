@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class NotesDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "note";
