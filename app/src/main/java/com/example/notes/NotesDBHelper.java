@@ -98,16 +98,17 @@ public class NotesDBHelper extends SQLiteOpenHelper {
 
         @SuppressLint("DefaultLocale")
         String where = String.format("%s = ?", NotesContract.NotesEntry._ID);
+        String[] ides = new String[] {String.valueOf(note.getId())};
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(NotesContract.NotesEntry._ID, note.getId());
+        //contentValues.put(NotesContract.NotesEntry._ID, note.getId());
         contentValues.put(NotesContract.NotesEntry.COLUMN_TITLE, note.getTitle());
         contentValues.put(NotesContract.NotesEntry.COLUMN_DESCRIPTION, note.getDescription());
         contentValues.put(NotesContract.NotesEntry.COLUMN_DAY_OF_WEEK, DayOfWeek.getId(note.getDayOfWeek()));
         contentValues.put(NotesContract.NotesEntry.COLUMN_PRIORITY, note.getPriority().getId());
 
-        db.update(NotesContract.NotesEntry.TABLE_NAME, contentValues, where, new String[] {String.valueOf(note.getId())});
+        db.update(NotesContract.NotesEntry.TABLE_NAME, contentValues, where, ides);
 
         db.close();
     }

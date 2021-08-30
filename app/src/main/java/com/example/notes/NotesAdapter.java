@@ -1,5 +1,6 @@
 package com.example.notes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<Note> notes;
     private OnNoteClickListener onNoteClickListener;
 
@@ -26,6 +27,12 @@ public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     interface OnNoteClickListener {
         void onNoteClick(int position);
         void onLongClick(int position);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+        this.notifyDataSetChanged();
     }
 
     public void setOnNoteClickListener(OnNoteClickListener onNoteClickListener) {

@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -21,7 +23,7 @@ public class AddNoteActivity extends Activity {
     private boolean isNew;
 
     private Note note;
-    private NotesDatabase database;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,10 @@ public class AddNoteActivity extends Activity {
         title = findViewById(R.id.edittext_addnote_title);
         description = findViewById(R.id.edittext_addnote_description);
 
-        database = NotesDatabase.getInstance(getApplicationContext());
+        viewModel = ViewModelProvider
+                    .AndroidViewModelFactory
+                    .getInstance(getApplication())
+                    .create(MainViewModel.class);
 
         instanceDayOfWeek();
         isNotNewNote();
@@ -92,9 +97,9 @@ public class AddNoteActivity extends Activity {
         saveDataInNote();
 
         if (isNew) {
-            database.getNotesDao().insertNote(note);
+            viewModel.insertNote(note);
         } else {
-            database.getNotesDao().updateNote(note);
+            viewModel.updateNote(note);
         }
 
         finish();
